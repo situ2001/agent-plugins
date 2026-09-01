@@ -1,0 +1,20 @@
+{
+  "name": "situ-plugins",
+  "displayName": "Situ Plugins",
+  "version": "1.0.0",
+  "description": "Personal hooks, skills, agents created by situ2001",
+  "author": {
+    "name": "routersitu"
+  },
+  "license": "MIT",
+  "keywords": [
+    "bash",
+    "hook",
+    "security",
+    "ripgrep",
+    "rm",
+    "safety"
+  ],
+  "hooks": "./hooks/hooks.json",
+  "defaultEnabled": true
+}

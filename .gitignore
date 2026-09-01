@@ -1,0 +1,3 @@
+# Claude Code plugin dev artifacts
+.claude-plugin/.claude-plugin-development/
+node_modules/
