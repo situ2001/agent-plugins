@@ -1,0 +1,36 @@
+{
+  "name": "agent-plugins",
+  "version": "1.0.0+codex.20260901124713",
+  "description": "Personal hooks, skills, agents created by situ2001",
+  "author": {
+    "name": "routersitu"
+  },
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "claude-code",
+    "hooks",
+    "skills",
+    "agents",
+    "developer-tools",
+    "workflow",
+    "bash",
+    "security",
+    "ripgrep",
+    "rm",
+    "safety"
+  ],
+  "interface": {
+    "displayName": "Agent plugins by situ2001",
+    "shortDescription": "A personal collection of hooks, skills, agents, and developer utilities.",
+    "longDescription": "A personal hodgepodge of hooks, skills, agents, and developer utilities created by situ2001 for Claude Code and Codex.",
+    "developerName": "routersitu",
+    "category": "Development",
+    "capabilities": [
+      "Interactive"
+    ],
+    "defaultPrompt": [
+      "Help me use the right capability from my personal plugins."
+    ]
+  }
+}

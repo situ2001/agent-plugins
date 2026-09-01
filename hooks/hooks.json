@@ -6,13 +6,13 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/check-rg-footgun.py\"",
+            "command": "python3 \"${PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/scripts/check-rg-footgun.py\"",
             "timeout": 10,
             "statusMessage": "checking rg -r footgun"
           },
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/check-rm-scope.py\"",
+            "command": "python3 \"${PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/scripts/check-rm-scope.py\"",
             "timeout": 10,
             "statusMessage": "checking rm -rf scope"
           }
