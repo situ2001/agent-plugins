@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Demo Preview"
+  short_description: "Isolate real integrations and inject reversible UI fixtures"
+  default_prompt: "Use $frontend-demo-preview to add a reversible fixture-driven demo mode to this frontend project."
