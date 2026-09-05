@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Plugin Setup"
+  short_description: "Register and refresh a local directory as a Codex plugin"
+  default_prompt: "Use $codex-plugin-setup to register this directory as a local Codex plugin."
