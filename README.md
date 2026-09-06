@@ -12,4 +12,4 @@ Or inside a session: `/plugin` → install from folder.
 
 ## Codex
 
-Install this folder as a local plugin, then review and trust the hooks with `/hooks`.
+Install this folder as a local plugin (Use `skills/codex-plugin-setup` when installing or maintaining), then review and trust the hooks with `/hooks`.
