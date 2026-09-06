@@ -1,18 +1,17 @@
 #!/usr/bin/env python3
-"""PreToolUse hook: scope checker for `rm -rf`.
+"""PreToolUse hook: require trash on macOS and scope-check rm/trash targets.
 
-Rejects a deletion when either rule holds:
-1. It touches .git -- the path has a `.git` segment, the target is the current
-   repo root (contains a .git dir), or the target itself is a repo directory.
-2. It escapes the current working directory -- the resolved real path is not
-   inside the cwd (a `cd X &&` chain moves the base to the new directory).
-
-Only literal paths are parsed; dynamic targets (globs / $vars / command
-substitution) cannot be statically resolved and are skipped ($HOME is expanded).
+Reject paths outside the working directory and paths touching .git or a repo
+root. A literal `cd X` changes the working directory for subsequent commands.
+Dynamic targets are rejected because their scope cannot be checked statically.
+On macOS, direct the caller to install missing trash with `brew install trash`;
+this hook only returns a recommendation and never installs anything.
 """
 import json
 import os
+import re
 import shlex
+import shutil
 import sys
 
 SEPARATORS = {"&&", "||", ";", "|", "|&", "&", ">", ">>", "<", "(", ")"}
@@ -22,14 +21,10 @@ def expand_target(tgt: str):
     """Return (resolvable_path, statically_resolvable); globs/vars/subst => not resolvable."""
     if any(ch in tgt for ch in "*?[") or "`" in tgt:
         return tgt, False
+    tgt = re.sub(r"\$\{HOME\}|\$HOME(?![A-Za-z0-9_])",
+                 lambda _: os.environ.get("HOME", ""), tgt)
     if "$" in tgt:
-        # Only expand $HOME / ${HOME}; skip other variables
-        if "${HOME}" in tgt:
-            tgt = tgt.replace("${HOME}", os.environ.get("HOME", ""))
-        elif "$HOME" in tgt:
-            tgt = tgt.replace("$HOME", os.environ.get("HOME", ""))
-        else:
-            return tgt, False
+        return tgt, False
     return tgt, True
 
 
@@ -44,7 +39,7 @@ def inside(p: str, boundary: str) -> bool:
         rel = os.path.relpath(p, boundary)
     except ValueError:
         return False
-    return rel == "." or not rel.startswith("..")
+    return rel != ".." and not rel.startswith(".." + os.sep)
 
 
 def has_git_segment(p: str) -> bool:
@@ -80,14 +75,17 @@ def main() -> None:
         output("allow")
         return
     tool_input = payload.get("tool_input") or {}
-    cmd = tool_input.get("command") or ""
+    cmd = tool_input.get("command") or tool_input.get("cmd") or ""
     if not cmd:
         output("allow")
         return
     session_cwd = payload.get("cwd") or os.getcwd()
 
     try:
-        tokens = shlex.split(cmd)
+        lexer = shlex.shlex(cmd, posix=True, punctuation_chars=";&|<>()")
+        lexer.whitespace_split = True
+        lexer.commenters = "#"
+        tokens = list(lexer)
     except ValueError:
         output("allow")  # unbalanced quotes etc.; let the shell report it
         return
@@ -102,11 +100,10 @@ def main() -> None:
             base = resolve(base, tokens[i + 1])
             i += 2
             continue
-        if t != "rm":
+        if os.path.basename(t) not in {"rm", "trash"}:
             i += 1
             continue
 
-        recursive = False
         opts_done = False
         targets = []
         j = i + 1
@@ -119,43 +116,37 @@ def main() -> None:
             else:
                 if tj == "--":
                     opts_done = True
-                elif tj.startswith("--"):
-                    if tj == "--recursive" or tj.startswith("--recursive="):
-                        recursive = True
-                else:
-                    body = tj[1:]
-                    if "r" in body or "R" in body:
-                        recursive = True
             j += 1
 
-        if recursive:
-            for tgt in targets:
-                tgt2, ok = expand_target(tgt)
-                if not ok:
-                    continue
-                resolved = resolve(base, tgt2)
-                if has_git_segment(resolved):
-                    problems.append(f"`{tgt}` touches .git (resolved: {resolved})")
-                    continue
-                if resolved == base and os.path.isdir(os.path.join(base, ".git")):
-                    problems.append(
-                        f"`{tgt}` would delete the current repo root (contains .git, resolved: {resolved})"
-                    )
-                    continue
-                if os.path.isdir(resolved) and os.path.isdir(os.path.join(resolved, ".git")):
-                    problems.append(
-                        f"`{tgt}` is a git repo directory (contains .git, resolved: {resolved})"
-                    )
-                    continue
-                if not inside(resolved, base):
-                    problems.append(
-                        f"`{tgt}` is outside the working directory {base} (resolved: {resolved})"
-                    )
+        for tgt in targets:
+            tgt2, ok = expand_target(tgt)
+            if not ok:
+                problems.append(f"`{tgt}` has dynamic scope; pass explicit file/directory paths")
+                continue
+            resolved = resolve(base, tgt2)
+            if has_git_segment(tgt2) or has_git_segment(resolved):
+                problems.append(f"`{tgt}` touches .git (resolved: {resolved})")
+                continue
+            if os.path.lexists(os.path.join(resolved, ".git")):
+                problems.append(
+                    f"`{tgt}` is a git repo directory (contains .git, resolved: {resolved})"
+                )
+                continue
+            if not inside(resolved, base):
+                problems.append(
+                    f"`{tgt}` is outside the working directory {base} (resolved: {resolved})"
+                )
+
+        if sys.platform == "darwin":
+            if os.path.basename(t) == "rm":
+                problems.append("On macOS, use `trash` instead of `rm` (pass paths without rm flags)")
+            if shutil.which("trash") is None:
+                problems.append("Install `trash` with `brew install trash`, then retry using `trash`")
         i = j
 
     if problems:
         uniq = list(dict.fromkeys(problems))
-        output("deny", "Blocked rm -rf scope violation:\n- " + "\n- ".join(uniq))
+        output("deny", "Blocked deletion:\n- " + "\n- ".join(uniq))
         return
     output("allow")
 

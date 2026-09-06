@@ -12,9 +12,9 @@
           },
           {
             "type": "command",
-            "command": "python3 \"${PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/scripts/check-rm-scope.py\"",
+            "command": "python3 \"${PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/scripts/check-deletion-scope.py\"",
             "timeout": 10,
-            "statusMessage": "checking rm -rf scope"
+            "statusMessage": "checking deletion command and scope"
           }
         ]
       }
