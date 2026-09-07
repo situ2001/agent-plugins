@@ -1,0 +1,4 @@
+interface:
+  display_name: "Minimal Behavior Check"
+  short_description: "Verify specific behavior with a minimal executable check"
+  default_prompt: "Use $minimal-behavior-check to verify a concrete behavior in the actual source with the smallest useful executable check."
