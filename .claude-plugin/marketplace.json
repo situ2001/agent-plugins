@@ -1,0 +1,20 @@
+{
+  "name": "agent-plugins",
+  "description": "Personal hooks and skills for Claude Code by situ2001",
+  "owner": {
+    "name": "situ2001"
+  },
+  "plugins": [
+    {
+      "name": "agent-plugins",
+      "description": "Personal hooks, skills, agents created by situ2001",
+      "version": "1.0.0",
+      "author": {
+        "name": "situ2001"
+      },
+      "source": "./",
+      "category": "development",
+      "homepage": "https://github.com/situ2001/agent-plugins"
+    }
+  ]
+}

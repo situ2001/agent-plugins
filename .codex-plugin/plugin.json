@@ -3,7 +3,7 @@
   "version": "1.0.0+codex.20260907132335",
   "description": "Personal hooks, skills, agents created by situ2001",
   "author": {
-    "name": "routersitu"
+    "name": "situ2001"
   },
   "license": "MIT",
   "keywords": [
@@ -24,7 +24,7 @@
     "displayName": "Agent plugins by situ2001",
     "shortDescription": "A personal collection of hooks, skills, agents, and developer utilities.",
     "longDescription": "A personal hodgepodge of hooks, skills, agents, and developer utilities created by situ2001 for Claude Code and Codex.",
-    "developerName": "routersitu",
+    "developerName": "situ2001",
     "category": "Development",
     "capabilities": [
       "Interactive"
