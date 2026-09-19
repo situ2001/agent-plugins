@@ -1,7 +1,7 @@
 {
   "name": "agent-plugins",
-  "version": "1.0.0+codex.20260917075036",
-  "description": "Personal hooks, skills, agents created by situ2001",
+  "version": "1.1.0+codex.20260919053139",
+  "description": "Personal hooks and skills for development workflows and conversation handoffs, by situ2001.",
   "author": {
     "name": "situ2001"
   },
@@ -14,6 +14,8 @@
     "agents",
     "developer-tools",
     "workflow",
+    "handoff",
+    "obsidian",
     "bash",
     "security",
     "ripgrep",
@@ -22,8 +24,8 @@
   ],
   "interface": {
     "displayName": "Agent plugins by situ2001",
-    "shortDescription": "A personal collection of hooks, skills, agents, and developer utilities.",
-    "longDescription": "A personal hodgepodge of hooks, skills, agents, and developer utilities created by situ2001 for Claude Code and Codex.",
+    "shortDescription": "Personal hooks and skills for development and conversation handoffs.",
+    "longDescription": "Personal hooks and skills for Claude Code and Codex, including frontend previews, behavior checks, writing guidance, plugin setup, and conversation handoffs. The situ-handoff skill saves continuation documents to the configured Obsidian folder, falling back to the current working directory when that folder is unavailable.",
     "developerName": "situ2001",
     "category": "Development",
     "capabilities": [
