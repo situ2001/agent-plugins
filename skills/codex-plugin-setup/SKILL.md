@@ -44,7 +44,7 @@ Use this skill when a user wants the current directory (or another existing dire
 
 ## Refresh after edits
 
-For a plugin already listed in a local marketplace, read its marketplace name, rotate the cachebuster, and reinstall:
+For a plugin already listed in a local marketplace, read its marketplace name, rotate the cachebuster, and reinstall. Follow the target repository's `AGENTS.md` for its version format and refresh command. For this repository, use `python3 scripts/refresh-plugin-version.py`; otherwise, when no repository convention exists, use the bundled helper below:
 
 ```bash
 python3 ~/.codex/skills/.system/plugin-creator/scripts/read_marketplace_name.py
