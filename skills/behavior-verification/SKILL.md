@@ -38,7 +38,7 @@ Choose directly from the question; there is no need to run every level.
 | Transformation, validation, serialization, calculations | Actual function in its supported runtime | Outputs and effects for supplied inputs |
 | State transitions, lifecycle, concurrency, retries | Actual stateful module with a compatible runner | Observed transitions and controlled completion orders |
 | Framework behavior and event handling | Real framework with its supported test environment | Only the lifecycle and event semantics it implements |
-| Native subsystem whose relevant APIs also run on a compatible host | Original source compiled for that host with narrow boundary shims | Shared subsystem behavior, not device integration |
+| Native source in an iOS/macOS app | Focused macOS executable compiling the original source where feasible | Executed source and real macOS APIs; device-only behavior remains untested |
 | Layout, device behavior, platform APIs | Actual relevant browser, device, or host | Behavior in the tested platform and configuration |
 | Persistence, transactions, process or service coordination | Relevant real integration environment | Guarantees of the exercised systems, not substituted ones |
 | User journey across application boundaries | Runnable application and relevant services | Only integrations actually exercised |
@@ -50,7 +50,7 @@ Read only the relevant execution recipe:
 - [Node / TypeScript](references/node-typescript.md): direct loading is impractical and temporary transpilation or `vm` is needed.
 - [React behavior](references/react-behavior.md): hooks, effects, component interactions, asynchronous transitions, or native component substitutes.
 - [Browser flows](references/browser-flows.md): Playwright/browser setup, request fixtures, browser assertions, and E2E boundaries.
-- [Native source on a compatible host](references/native-host.md): a platform app's subsystem can run against real shared OS APIs while UI or device-only collaborators are replaced at its boundary.
+- [Native source on a compatible host](references/native-host.md): try a focused local compile-and-run check for iOS/macOS source, retaining the real behavior and replacing only unavailable boundaries.
 
 For other languages, apply the same method using their native runtime and assertion tools.
 

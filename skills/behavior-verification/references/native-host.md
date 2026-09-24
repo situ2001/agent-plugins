@@ -1,6 +1,6 @@
 # Native source on a compatible host
 
-Use this route when the disputed behavior lives in native platform source but its decisive APIs also exist on the available host. Choose the target device or simulator when the behavior depends on a platform-specific lifecycle, configuration, or service unavailable on that host.
+For iOS/macOS source, first consider a focused macOS compile-and-run check. Many behaviors can be exercised locally even when the full iOS app cannot build or launch: compile the original files and keep the system APIs relevant to the question real. Choose an iOS simulator or device when the result depends on iOS-only APIs, app lifecycle, entitlements, or platform configuration that the macOS check cannot preserve.
 
 ## Keep the source real
 
@@ -19,7 +19,7 @@ Report the original-source hash or revision, compiler and linked system framewor
 
 ## iOS and macOS hints
 
-- Objective-C files can often be built in a scratch macOS target with `clang`, ARC and blocks flags, and the Apple frameworks they actually use. Swift files can use `swiftc`. Check API availability and conditional compilation before treating either build as equivalent to the iOS target.
+- Objective-C files can often be built and run in a scratch macOS target with `clang`, ARC and blocks flags, and the Apple frameworks they actually use. Swift files can use `swiftc`. Start with the source and its reachable dependencies rather than requiring an entire Xcode app target. Check API availability and conditional compilation before treating the result as equivalent to the iOS target.
 - Keep the platform framework relevant to the question real. Use small declarations or adapters to satisfy unrelated UIKit or WebKit references, and record what those substitutions exclude. Use an iOS simulator or device when the actual UIKit, WebKit, app lifecycle, or entitlements decide the outcome.
 - Native APIs may create files relative to the working directory or persist state between runs. Run from an owned scratch directory, isolate initial state, and inspect generated artifacts before cleanup.
 
