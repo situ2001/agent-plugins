@@ -1,4 +1,4 @@
 interface:
   display_name: "Behavior Verification"
-  short_description: "Verify logic, React interactions, and browser flows"
-  default_prompt: "Use $behavior-verification to verify a concrete behavior in the actual source with the smallest faithful runtime, using a function, React component, or browser check as appropriate."
+  short_description: "Verify source behavior in compatible runtimes"
+  default_prompt: "Use $behavior-verification to verify a concrete behavior in the actual source with the smallest faithful runtime, such as a function, native subsystem, React component, or browser."
