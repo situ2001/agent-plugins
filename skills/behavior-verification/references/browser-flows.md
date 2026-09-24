@@ -16,6 +16,14 @@ Identify the intended evidence:
 
 Choose the least expensive scope that can answer the question. A request mock can validate frontend behavior without invoking a real payment, message, or destructive operation. Verification alone does not authorize those effects. A Web browser does not replace a Hippy/native host.
 
+## Probe one browser behavior without starting the app
+
+When the uncertainty is a browser API rule rather than app routing or UI wiring, a small Playwright page can be enough. For origin-dependent behavior, intercept only a disposable document URL under the relevant origin with `page.route(..., route => route.fulfill(...))`, then navigate to it. This gives the page that origin without starting a dev server; `page.setContent` on `about:blank` does not. Leave the resource whose behavior matters unmocked, and assert its observable effect in the browser (for example, whether a canvas can export after drawing a redirected image). Use this pattern only when accessing that origin and resource is authorized. It establishes the tested browser and network behavior, not that the application route or host integration works.
+
+Load the production function if its module can run in the browser. If module imports make a focused check impractical, extract the function and its required helpers from the requested source state, use the project's compatible transform, and disclose that module wiring was bypassed. Do not rewrite the algorithm in the probe. Prefer the original revision as a negative control; run original and fixed source through the same action and assertion in fresh contexts so image caches, cookies, and service workers cannot change the comparison. A scratch mutation is a weaker substitute when the original revision is unavailable; verify that it changes only the intended behavior.
+
+Keep the probe short: record the source revision and input URL, create a fresh context, install the document route before navigation, execute the source behavior, assert the browser result, then close the context and browser in `finally`. Give navigation and the awaited browser action explicit timeouts. Inspect both case output and the process exit status; a result printed before a hung `browser.close()` is incomplete. If a local Playwright package is missing, an isolated temporary install may be reasonable, but record its version and command and leave project manifests untouched.
+
 ## Establish deterministic boundaries
 
 Start with a fresh browser context and explicit route, storage/auth state, viewport, and fixture data as relevant. Ensure the served build contains the source being checked; an old server or deployment can silently test another revision.
