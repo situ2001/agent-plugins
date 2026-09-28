@@ -1,4 +1,4 @@
-## Avoid Speculative Defensiveness
+## Avoid Speculative Defensiveness and Inferred Properties
 
 Do not add guards, fallbacks, retries, compatibility paths,
 version checks, arbitrary limits, or recovery logic merely
@@ -16,6 +16,11 @@ Defensive handling is justified when there is a concrete source:
 
 Do not invent restrictions such as maximum page counts, step counts,
 file sizes, supported versions, or timeouts without such a source.
+
+Add inferred or evaluative properties, such as scores, grades,
+ambiguity flags, or confidence values, only when an explicit task
+requirement or established contract calls for them. A possible future
+use is not a requirement.
 
 When debugging, first check whether an existing guard, fallback,
 validation rule, or self-imposed restriction is causing the failure
