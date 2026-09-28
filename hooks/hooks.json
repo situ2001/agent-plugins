@@ -1,5 +1,16 @@
 {
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat \"${PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/hooks/avoid-speculative-defensiveness.md\"",
+            "statusMessage": "loading coding guidance"
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Bash",
