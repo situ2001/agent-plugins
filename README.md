@@ -1,6 +1,8 @@
-# agent-plugins
+# situ2001-plugins
 
-Personal hooks and skills for Claude Code and Codex.
+Personal hooks and skills for Claude Code and Codex, packaged as the `situ2001` plugin.
+
+The marketplace is named `situ2001-plugins`; skills use the `situ2001:` namespace.
 
 ## Claude Code
 

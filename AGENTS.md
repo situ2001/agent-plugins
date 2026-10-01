@@ -11,7 +11,9 @@ After changing plugin skills, hooks, scripts, or metadata:
 3. Validate before committing or reinstalling:
 
    ```bash
-   python3 ~/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py .
+   claude plugin validate .claude-plugin/plugin.json
+   claude plugin validate .claude-plugin/marketplace.json
+   python3 -m json.tool .codex-plugin/plugin.json > /dev/null
    python3 ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/<changed-skill>
    git diff --check
    ```
@@ -21,11 +23,11 @@ After changing plugin skills, hooks, scripts, or metadata:
 5. Read the configured personal marketplace name, then reinstall using the returned name:
 
    ```bash
-   python3 ~/.codex/skills/.system/plugin-creator/scripts/read_marketplace_name.py
-   codex plugin add agent-plugins@<marketplace-name>
+   python3 -c 'import json, pathlib; print(json.loads((pathlib.Path.home() / ".agents/plugins/marketplace.json").read_text())["name"])'
+   codex plugin add situ2001@<marketplace-name>
    ```
 
-   The personal marketplace is discovered implicitly; do not register it again. For another marketplace, follow [codex-plugin-setup](skills/codex-plugin-setup/SKILL.md).
+   The configured marketplace is `situ2001-plugins`. The personal marketplace is discovered implicitly; do not register it again. For another marketplace, follow [codex-plugin-setup](skills/codex-plugin-setup/SKILL.md).
 6. Tell the user to start a new Codex task to load the refreshed plugin. Reinstall last: the current task may retain hook paths into the old cache after it is removed.
 
 This repository's timestamp format takes precedence over the bundled plugin-creator helper's `+codex.<timestamp>` convention. Use the repository script above when updating this plugin.

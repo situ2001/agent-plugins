@@ -1,6 +1,6 @@
 {
-  "name": "agent-plugins",
-  "displayName": "Agent plugins by situ2001",
+  "name": "situ2001",
+  "displayName": "situ2001",
   "version": "1.1.0",
   "description": "Personal hooks and skills for development workflows and conversation handoffs, by situ2001.",
   "author": {

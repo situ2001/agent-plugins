@@ -1,6 +1,6 @@
 {
-  "name": "agent-plugins",
-  "version": "1.1.0+261001054913",
+  "name": "situ2001",
+  "version": "1.1.0+261001060140",
   "description": "Personal hooks and skills for development workflows and conversation handoffs, by situ2001.",
   "author": {
     "name": "situ2001"
@@ -23,7 +23,7 @@
     "safety"
   ],
   "interface": {
-    "displayName": "Agent plugins by situ2001",
+    "displayName": "situ2001",
     "shortDescription": "Personal hooks and skills for development and conversation handoffs.",
     "longDescription": "Personal hooks and skills for Claude Code and Codex, including frontend previews, behavior checks, writing guidance, plugin setup, and conversation handoffs.",
     "developerName": "situ2001",

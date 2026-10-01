@@ -33,10 +33,10 @@ Use this skill when a user wants the current directory (or another existing dire
 
    Preserve existing plugin files; ensure the entry points to `./plugins/<plugin-name>` and includes installation policy, authentication policy, and category.
 
-4. Install it from the implicit personal marketplace:
+4. Read `name` from `~/.agents/plugins/marketplace.json` and install from that implicit personal marketplace:
 
    ```bash
-   codex plugin add <plugin-name>@personal
+   codex plugin add <plugin-name>@<marketplace-name>
    codex plugin list
    ```
 
