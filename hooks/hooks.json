@@ -7,6 +7,11 @@
             "type": "command",
             "command": "cat \"${PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/hooks/avoid-speculative-defensiveness.md\"",
             "statusMessage": "loading coding guidance"
+          },
+          {
+            "type": "command",
+            "command": "if [ -d \"$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/situ-vault\" ]; then cat \"${PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/hooks/obsidian-vault.md\"; fi",
+            "statusMessage": "loading Obsidian vault guidance"
           }
         ]
       }
