@@ -5,12 +5,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cat \"${PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/hooks/avoid-speculative-defensiveness.md\"",
+            "command": "cat \"${PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/hooks/docs/avoid-speculative-defensiveness.md\"",
             "statusMessage": "loading coding guidance"
           },
           {
             "type": "command",
-            "command": "if [ -d \"$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/situ-vault\" ]; then cat \"${PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/hooks/obsidian-vault.md\"; fi",
+            "command": "if [ -d \"$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/situ-vault\" ]; then cat \"${PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/hooks/docs/obsidian-vault.md\"; fi",
             "statusMessage": "loading Obsidian vault guidance"
           }
         ]
@@ -22,13 +22,13 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/scripts/check-rg-footgun.py\"",
+            "command": "python3 \"${PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/hooks/scripts/check-rg-footgun.py\"",
             "timeout": 10,
             "statusMessage": "checking rg -r footgun"
           },
           {
             "type": "command",
-            "command": "python3 \"${PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/scripts/check-deletion-scope.py\"",
+            "command": "python3 \"${PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/hooks/scripts/check-deletion-scope.py\"",
             "timeout": 10,
             "statusMessage": "checking deletion command and scope"
           }
