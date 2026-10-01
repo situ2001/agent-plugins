@@ -1,6 +1,6 @@
 ---
 name: obsidian-vault
-description: Search, cite, organize, create, or edit notes in the user's Obsidian vault. Use when the user requests vault work or a task depends on their notes, preferences, project context, or past decisions, even if Obsidian is not explicitly mentioned.
+description: Use the user's Obsidian vault as a personal knowledge base when a task depends on their notes, preferences, project context, or past decisions. Also use for searching, organizing, creating, or editing vault notes.
 ---
 
 # Obsidian Vault
