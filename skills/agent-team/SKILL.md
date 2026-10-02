@@ -50,6 +50,8 @@ Escalate changes to the agreed goal, scope, shared/public interface, or authoriz
 
 Use completion notifications or runtime-appropriate agent waits. Investigate status when a dependency is blocked or intervention could help; avoid turning routine progress into repeated polling and summaries. Keep the user informed of meaningful findings, decisions, and remaining uncertainty.
 
+For a Codex director using Herdr with no independent work left while a delegated result is pending, read [interrupt, wait, and continue](references/codex-herdr-wait.md) before handing the wait to an independent controller.
+
 ## Accept and deliver
 
 The director checks the key commitments against the delivered interface and acceptance evidence, including integration between workstreams. When a concrete discrepancy, missing evidence, or integration risk needs investigation or another check, delegate that follow-up and assess the returned evidence. Inspect source directly only when needed for a specific director-level decision; routine acceptance relies on the delivered evidence.

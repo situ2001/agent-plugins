@@ -40,6 +40,8 @@ Submission alone does not establish completion. Launch independent work before w
 
 ## Wait for delivery
 
+When a Codex director has no independent work left and needs to yield its current turn until a delegated target settles, use the [independent interrupt/wait controller](codex-herdr-wait.md). It saves continuation context, interrupts the registered turn, waits outside that turn, and starts a new turn on the same thread. Use the ordinary wait below when retaining the current turn is appropriate.
+
 After launching ready work, wait when the next decision depends on an executor's result:
 
 ```bash
