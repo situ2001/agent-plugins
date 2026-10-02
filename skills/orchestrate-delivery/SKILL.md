@@ -11,7 +11,7 @@ Give the user control over intent, constraints, and success criteria; give agent
 
 Prefer **GPT-6 Astra Medium** for the director. The current agent directs the work and communicates with the user directly, without checking its model or requiring a model switch. Default to **GPT-6.1 Sol High** for Codex executors, including investigators and independent verifiers. Honor an explicitly requested agent CLI or model; Claude Code uses its configured model unless the user specifies one.
 
-Use the user's explicitly chosen runtime. For `auto`, or when none is specified, choose Herdr when `HERDR_ENV=1` and the `herdr` CLI is available; otherwise choose Codex built-in collaboration. Report the selected runtime briefly. Read only the matching runtime guide: [Codex built-in](references/codex-builtin.md) or [Herdr](references/herdr.md). The guide supplies the launch, communication, and wait mechanics; the workflow below is shared. Launch CLI executors with automatic approval review as described there. When the selected runtime cannot provide the required models, effort settings, or delegation, explain the limitation and ask the user to choose a supported arrangement before proceeding. Do not silently switch runtimes or claim a model switch. A role assignment grants no additional filesystem, external-action, or cross-chat permissions.
+Use the user's explicitly chosen runtime. For `auto`, or when none is specified, choose Herdr when `HERDR_ENV=1` and the `herdr` CLI is available; otherwise choose Codex built-in collaboration. Report the selected runtime briefly. Read only the matching runtime guide: [Codex built-in](references/codex-builtin.md) or [Herdr](references/herdr.md). The guide supplies the launch, communication, wait, and cleanup mechanics; the workflow below is shared. Launch CLI executors with automatic approval review as described there. When the selected runtime cannot provide the required models, effort settings, or delegation, explain the limitation and ask the user to choose a supported arrangement before proceeding. Do not silently switch runtimes or claim a model switch. A role assignment grants no additional filesystem, external-action, or cross-chat permissions.
 
 ## Confirm the direction
 
@@ -53,5 +53,7 @@ Use completion notifications or bounded agent waits. Investigate status when a d
 ## Accept and deliver
 
 The director checks the key commitments against the delivered interface and acceptance evidence, including integration between workstreams. When a concrete discrepancy, missing evidence, or integration risk needs investigation or another check, delegate that follow-up and assess the returned evidence. Inspect source directly only when needed for a specific director-level decision; routine acceptance relies on the delivered evidence.
+
+For Herdr, preserve the accepted results and complete the runtime guide's executor cleanup before final delivery or handoff, unless the user asks to keep executors available.
 
 Accept when the confirmed criteria are supported and material gaps are resolved or explicitly accepted by the user. Report what was delivered, how to use its interface or entry point, what the evidence establishes, and any remaining limits. Keep implementation logs and internal coordination out of the user's delivery summary.
