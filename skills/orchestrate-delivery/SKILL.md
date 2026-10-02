@@ -5,7 +5,7 @@ description: Orchestrate multi-agent delivery with GPT-6 Astra Medium direction 
 
 # Orchestrate Delivery
 
-Give the user control over intent, constraints, and success criteria; give agents ownership of completing the work. The director manages commitments and acceptance, while executors own implementation and routine validation.
+Give the user control over intent, constraints, and success criteria; give agents ownership of completing the work. Treat the main agent as the **director**: reserve its attention for the big picture, direction, consequential decisions, and acceptance. Delegate concrete execution as fully as practical; the director need not perform hands-on work to own the outcome.
 
 ## Establish the director
 
@@ -23,7 +23,9 @@ Follow the focused/base interview's frontier and completion rules. Summarize the
 
 ## Delegate commitments
 
-The director owns task decomposition, shared interfaces, consequential tradeoffs, and final acceptance. Choose roles and concurrency to fit the work; a developer can investigate and test its own change. Add an independent verifier when behavioral uncertainty or the cost of a mistake justifies a separate perspective. Small tasks need no ceremonial team of three.
+The director owns task decomposition, shared interfaces, consequential tradeoffs, and final acceptance. Delegate investigation, implementation, debugging, routine validation, and integration work to executors by default. Use their findings to refine the plan, resolve dependencies, and give guidance. When work stalls, clarify the commitment, supply missing context, or reassign it so execution stays with an executor.
+
+Choose roles and concurrency to fit the work; a developer can investigate and test its own change. Add an independent verifier when behavioral uncertainty or the cost of a mistake justifies a separate perspective. A small task can use one executor while the main agent remains the director.
 
 Run independent workstreams in parallel when dependencies, write ownership, and available agent slots allow it. Launch ready work before waiting for results; wait when dependent work or acceptance needs those results.
 
@@ -50,6 +52,6 @@ Use completion notifications or bounded agent waits. Investigate status when a d
 
 ## Accept and deliver
 
-The director checks the key commitments against the delivered interface and acceptance evidence, including integration between workstreams. Drill into source or rerun checks when a concrete discrepancy, missing evidence, or integration risk warrants it; routine acceptance does not require rereading every implementation or repeating all tests.
+The director checks the key commitments against the delivered interface and acceptance evidence, including integration between workstreams. When a concrete discrepancy, missing evidence, or integration risk needs investigation or another check, delegate that follow-up and assess the returned evidence. Inspect source directly only when needed for a specific director-level decision; routine acceptance relies on the delivered evidence.
 
 Accept when the confirmed criteria are supported and material gaps are resolved or explicitly accepted by the user. Report what was delivered, how to use its interface or entry point, what the evidence establishes, and any remaining limits. Keep implementation logs and internal coordination out of the user's delivery summary.
