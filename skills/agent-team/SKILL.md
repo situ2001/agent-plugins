@@ -1,6 +1,6 @@
 ---
 name: agent-team
-description: Orchestrate multi-agent delivery with GPT-6 Astra Medium direction and GPT-6.1 Sol High execution. Use when the user wants an agent team to deliver a task, or substantial work needs coordinated delegation.
+description: Orchestrate multi-agent delivery with GPT-6 Astra Medium direction and GPT-6.1 Sol High execution when explicitly invoked by the user.
 ---
 
 # Agent Team

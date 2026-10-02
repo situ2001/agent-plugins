@@ -1,3 +1,5 @@
 interface:
   display_name: "Agent Team"
   short_description: "Coordinate Astra direction and Sol delivery"
+policy:
+  allow_implicit_invocation: false
