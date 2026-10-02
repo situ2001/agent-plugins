@@ -1,0 +1,3 @@
+interface:
+  display_name: "Orchestrate Delivery"
+  short_description: "Coordinate Astra direction and Sol delivery"
