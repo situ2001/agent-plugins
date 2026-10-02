@@ -11,9 +11,9 @@ Give the user control over intent, constraints, and success criteria; give agent
 
 Use **GPT-6 Astra Medium** for the director and **GPT-6.1 Sol High** for executors, including investigators and independent verifiers. A skill cannot change the current model.
 
-Use the user's chosen runtime. Otherwise use Codex built-in collaboration when available. Read only the matching runtime guide: [Codex built-in](references/codex-builtin.md) or [Herdr](references/herdr.md). The guide supplies the launch, communication, and wait mechanics; the workflow below is shared. When the selected runtime cannot provide the required models, effort settings, or delegation, explain the limitation and ask the user to choose a supported arrangement before proceeding. Do not silently switch runtimes or claim a model switch. A role assignment grants no additional filesystem, external-action, or cross-chat permissions.
+The current agent must be confirmed as GPT-6 Astra with medium reasoning effort before beginning orchestration. If it is using another model or effort, or its configuration is unknown, stop and ask the user to select GPT-6 Astra Medium and invoke the skill again. Do not create a replacement director. Once confirmed, the current agent directs the work and communicates with the user directly.
 
-If the current agent is known to be Astra Medium, it can direct the work. Otherwise, create an Astra Medium director through the selected runtime. The entry agent relays user questions and answers, authorization, and the director's final delivery; it does not create a second layer of design review. Include this skill's path and the communication route in the director's brief. A director already assigned this role continues it without spawning a replacement director.
+Use the user's chosen runtime. Otherwise use Codex built-in collaboration when available. Read only the matching runtime guide: [Codex built-in](references/codex-builtin.md) or [Herdr](references/herdr.md). The guide supplies the launch, communication, and wait mechanics; the workflow below is shared. When the selected runtime cannot provide the required models, effort settings, or delegation, explain the limitation and ask the user to choose a supported arrangement before proceeding. Do not silently switch runtimes or claim a model switch. A role assignment grants no additional filesystem, external-action, or cross-chat permissions.
 
 ## Confirm the direction
 
@@ -21,7 +21,7 @@ Before implementation, read and apply [grilling-focused](../grilling-focused/SKI
 
 Carry forward already confirmed decisions. Build the focused design tree only from unresolved choices that need user judgment and could materially change the goal, scope, core approach, or acceptance criteria. Investigators establish facts; executors decide local, reversible implementation details. While direction is unresolved, discovery can supply evidence for decisions, but implementation waits for its scope to be confirmed.
 
-Follow the focused/base interview's frontier and completion rules. Summarize the resulting direction and obtain confirmation before executing a newly agreed scope. An existing confirmation covering the current scope remains valid; unanswered questions and elapsed time are not confirmation. Relay through the entry agent when the director cannot reach the user directly.
+Follow the focused/base interview's frontier and completion rules. Summarize the resulting direction and obtain confirmation before executing a newly agreed scope. An existing confirmation covering the current scope remains valid; unanswered questions and elapsed time are not confirmation.
 
 ## Delegate commitments
 
