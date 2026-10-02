@@ -1,9 +1,9 @@
 ---
-name: orchestrate-delivery
+name: agent-team
 description: Orchestrate multi-agent delivery with GPT-6 Astra Medium direction and GPT-6.1 Sol High execution. Use when the user wants an agent team to deliver a task, or substantial work needs coordinated delegation.
 ---
 
-# Orchestrate Delivery
+# Agent Team
 
 Give the user control over intent, constraints, and success criteria; give agents ownership of completing the work. Treat the main agent as the **director**: reserve its attention for the big picture, direction, consequential decisions, and acceptance. Delegate concrete execution as fully as practical; the director need not perform hands-on work to own the outcome.
 
@@ -48,7 +48,7 @@ Connect verifier and developer directly through the available agent messaging to
 
 Escalate changes to the agreed goal, scope, shared/public interface, or authorization, and conflicting evidence that needs a decision. Include the failed commitment, relevant evidence, consequence, and a recommended next step. The director resolves tradeoffs within its authority and returns to the user for changes requiring user judgment or permission. A runtime failure or uncertain implementation detail alone belongs in the executor's investigation loop.
 
-Use completion notifications or bounded agent waits. Investigate status when a dependency is blocked or intervention could help; avoid turning routine progress into repeated polling and summaries. Keep the user informed of meaningful findings, decisions, and remaining uncertainty.
+Use completion notifications or runtime-appropriate agent waits. Investigate status when a dependency is blocked or intervention could help; avoid turning routine progress into repeated polling and summaries. Keep the user informed of meaningful findings, decisions, and remaining uncertainty.
 
 ## Accept and deliver
 

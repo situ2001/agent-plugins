@@ -43,15 +43,15 @@ Submission alone does not establish completion. Launch independent work before w
 After launching ready work, wait when the next decision depends on an executor's result:
 
 ```bash
-herdr agent wait <target> --timeout <milliseconds>
+herdr agent wait <target>
 ```
 
-Choose the wait duration within the calling environment's responsiveness requirements. Independent waits may run concurrently.
+Default to an indefinite wait. Add `--timeout <milliseconds>` only when a concrete task or calling-environment requirement needs a bounded wait. Independent waits may run concurrently.
 
 Keep two kinds of return distinct:
 
 - **The tool yields a running process or cell handle:** resume that same execution through the tool's continuation API until it returns. The Herdr wait is still active; do not launch a second wait or a sleep-and-read loop for that target.
-- **The Herdr wait returns:** on `idle` or `done`, read the delivered response and assess the commitment; on `blocked`, inspect and handle the requested interaction. An ordinary timeout is an opportunity to continue waiting, not evidence of a stalled executor. Resume with another bounded wait unless a concrete failure or unresolved dependency calls for investigation. Handle other errors through the official skill's diagnostic procedure.
+- **The Herdr wait returns:** on `idle` or `done`, read the delivered response and assess the commitment; on `blocked`, inspect and handle the requested interaction. An ordinary timeout is an opportunity to continue waiting, not evidence of a stalled executor. Continue with another wait, indefinite by default, unless a concrete failure or unresolved dependency calls for investigation. Handle other errors through the official skill's diagnostic procedure.
 
 Keep required user updates separate from executor inspection. A communication interval alone is not a reason to read terminal output, send another prompt, or summarize unfinished work. Continue waiting until there is a result to assess, a blocker to resolve, or new user direction to apply.
 
