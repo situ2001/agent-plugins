@@ -1,6 +1,6 @@
 ---
 name: orchestrate-delivery
-description: Orchestrate multi-agent delivery with GPT-6 Astra Medium direction and GPT-6 Sol High execution. Use when the user wants an agent team to deliver a task, or substantial work needs coordinated delegation.
+description: Orchestrate multi-agent delivery with GPT-6 Astra Medium direction and GPT-6.1 Sol High execution. Use when the user wants an agent team to deliver a task, or substantial work needs coordinated delegation.
 ---
 
 # Orchestrate Delivery
@@ -9,20 +9,11 @@ Give the user control over intent, constraints, and success criteria; give agent
 
 ## Establish the director
 
-Use **GPT-6 Astra Medium** for the director and **GPT-6 Sol High** for executors, including investigators and independent verifiers. A skill cannot change the current model.
+Use **GPT-6 Astra Medium** for the director and **GPT-6.1 Sol High** for executors, including investigators and independent verifiers. A skill cannot change the current model.
 
-With `collaboration.spawn_agent`, select:
+Use the user's chosen runtime. Otherwise use Codex built-in collaboration when available. Read only the matching runtime guide: [Codex built-in](references/codex-builtin.md) or [Herdr](references/herdr.md). The guide supplies the launch, communication, and wait mechanics; the workflow below is shared. When the selected runtime cannot provide the required models, effort settings, or delegation, explain the limitation and ask the user to choose a supported arrangement before proceeding. Do not silently switch runtimes or claim a model switch. A role assignment grants no additional filesystem, external-action, or cross-chat permissions.
 
-| Role | `model` | `reasoning_effort` | `fork_turns` |
-| --- | --- | --- | --- |
-| Director | `gpt-6-astra` | `medium` | `none` |
-| Executor | `gpt-6-sol` | `high` | `none` |
-
-These are GPT-6 models, not GPT-6.1. Full-history forks inherit their parent's settings and do not accept these overrides. Give each fresh agent a self-contained brief with the minimum necessary background, authoritative decisions, applicable instructions, and accessible resources.
-
-If the current agent is known to be Astra Medium, it can direct the work. Otherwise, create an Astra Medium director with the table's settings. The entry agent relays user questions and answers, authorization, and the director's final delivery; it does not create a second layer of design review. Include this skill's path and the communication route in the director's brief. A director already assigned this role continues it without spawning a replacement director.
-
-Use the available subagent tools, not user-owned chat creation. Read their actual model-selection, communication, and concurrency capabilities. When the required models, effort settings, or delegation are unavailable, explain the limitation and ask the user to choose a supported arrangement; do not silently substitute or claim a model switch. A role assignment grants no additional filesystem, external-action, or cross-chat permissions.
+If the current agent is known to be Astra Medium, it can direct the work. Otherwise, create an Astra Medium director through the selected runtime. The entry agent relays user questions and answers, authorization, and the director's final delivery; it does not create a second layer of design review. Include this skill's path and the communication route in the director's brief. A director already assigned this role continues it without spawning a replacement director.
 
 ## Confirm the direction
 
