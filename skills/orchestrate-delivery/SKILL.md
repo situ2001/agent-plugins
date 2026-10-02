@@ -9,11 +9,9 @@ Give the user control over intent, constraints, and success criteria; give agent
 
 ## Establish the director
 
-Use **GPT-6 Astra Medium** for the director and **GPT-6.1 Sol High** for executors, including investigators and independent verifiers. A skill cannot change the current model.
+Prefer **GPT-6 Astra Medium** for the director. The current agent directs the work and communicates with the user directly, without checking its model or requiring a model switch. Use **GPT-6.1 Sol High** for executors, including investigators and independent verifiers.
 
-The current agent must be confirmed as GPT-6 Astra with medium reasoning effort before beginning orchestration. If it is using another model or effort, or its configuration is unknown, stop and ask the user to select GPT-6 Astra Medium and invoke the skill again. Do not create a replacement director. Once confirmed, the current agent directs the work and communicates with the user directly.
-
-Use the user's chosen runtime. Otherwise use Codex built-in collaboration when available. Read only the matching runtime guide: [Codex built-in](references/codex-builtin.md) or [Herdr](references/herdr.md). The guide supplies the launch, communication, and wait mechanics; the workflow below is shared. When the selected runtime cannot provide the required models, effort settings, or delegation, explain the limitation and ask the user to choose a supported arrangement before proceeding. Do not silently switch runtimes or claim a model switch. A role assignment grants no additional filesystem, external-action, or cross-chat permissions.
+Use the user's explicitly chosen runtime. For `auto`, or when none is specified, choose Herdr when `HERDR_ENV=1`, the `herdr` CLI is available, and `herdr pane current --current` resolves this agent's live pane; otherwise choose Codex built-in collaboration. Report the selected runtime briefly. Read only the matching runtime guide: [Codex built-in](references/codex-builtin.md) or [Herdr](references/herdr.md). The guide supplies the launch, communication, and wait mechanics; the workflow below is shared. When the selected runtime cannot provide the required models, effort settings, or delegation, explain the limitation and ask the user to choose a supported arrangement before proceeding. Do not silently switch runtimes or claim a model switch. A role assignment grants no additional filesystem, external-action, or cross-chat permissions.
 
 ## Confirm the direction
 
@@ -26,6 +24,8 @@ Follow the focused/base interview's frontier and completion rules. Summarize the
 ## Delegate commitments
 
 The director owns task decomposition, shared interfaces, consequential tradeoffs, and final acceptance. Choose roles and concurrency to fit the work; a developer can investigate and test its own change. Add an independent verifier when behavioral uncertainty or the cost of a mistake justifies a separate perspective. Small tasks need no ceremonial team of three.
+
+Run independent workstreams in parallel when dependencies, write ownership, and available agent slots allow it. Launch ready work before waiting for results; wait when dependent work or acceptance needs those results.
 
 Give each executor a brief containing:
 

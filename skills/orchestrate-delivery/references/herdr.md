@@ -1,6 +1,6 @@
 # Herdr runtime
 
-Use Herdr only when the user selected it. This guide supplies runtime mechanics for the shared [delivery workflow](../SKILL.md). Read the installed `herdr --skill` before control; use command `--help` and the [agent automation docs](https://herdr.dev/docs/agent-automation/) for further syntax and behavior.
+Use this guide when Herdr is selected by the shared [delivery workflow](../SKILL.md), either explicitly by the user or through automatic detection. Read the installed `herdr --skill` before control; use command `--help` and the [agent automation docs](https://herdr.dev/docs/agent-automation/) for further syntax and behavior.
 
 ## Establish the session and roles
 
