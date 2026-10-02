@@ -1,17 +1,24 @@
 # Herdr runtime
 
-Use this guide when Herdr is selected by the shared [delivery workflow](../SKILL.md), either explicitly by the user or through automatic detection. Read the installed `herdr --skill` before control; use command `--help` and the [agent automation docs](https://herdr.dev/docs/agent-automation/) for further syntax and behavior.
+When the [delivery workflow](../SKILL.md) selects Herdr, read and follow the official `herdr` skill from the skill catalog or `~/.agents/skills/herdr/SKILL.md`. If it is not installed, use `herdr --skill` for the bundled instructions; [setup-my-skills](../../setup-my-skills/SKILL.md) installs or refreshes the official skill when requested.
 
-## Establish the session and roles
+The official skill owns CLI discovery, caller context, pane layout, agent lifecycle, messaging, waits, output retrieval, and cleanup. This reference adds only delivery-specific settings.
 
-Confirm `HERDR_ENV=1` and that `herdr pane current --current` resolves this agent's live pane before controlling the session. If caller context is absent or stale, report that the selected runtime is unavailable; do not redirect commands to the user's focused pane. Inspect live pane, agent state, and available room before choosing concurrency. Herdr requires an existing shell pane for each new agent. By default, split a sibling pane in the current tab with `--current --cwd "$PWD" --no-focus`, then take the new pane ID from `.result.pane.pane_id`. Keep track of panes you create; leave unrelated panes alone. Do not create a separate worktree or workspace unless the task calls for one.
+## Launch settings
 
-Start Codex with `herdr agent start <unique-name> --kind codex --pane <new-pane-id> -- <codex-args>`. Arguments after `--` pass to Codex. Use `-m gpt-6.1-sol -c 'model_reasoning_effort="high"'` for executors, investigators, and verifiers. Check actual model availability at launch; the CLI's acceptance of an alias alone does not prove account support. If the required role cannot start with its model and effort, report the limitation instead of substituting a role. A successful `agent start` means the named agent was detected in that pane and is ready for a prompt.
+Use the official skill to create a shell pane, then launch the requested CLI with automatic approval review:
 
-Give every new agent a self-contained brief and its communication route. Use unique live agent names or returned pane IDs as addresses. Herdr names refer to current pane occupants; refresh them from `herdr agent list` when an agent exits or is replaced. Give peers one another's live addresses as they become available. The director collects executor results through explicit reads; Herdr provides no native parent mailbox or automatic final-answer delivery.
+```bash
+herdr agent start <unique-name> --kind codex --pane <new-pane-id> -- --no-daemon --approve-for-me -m gpt-6.1-sol -c 'model_reasoning_effort="high"'
+herdr agent start <unique-name> --kind claude --pane <new-pane-id> -- --permission-mode auto
+```
 
-## Prompt, inspect, and close work
+Honor explicit model and effort choices. Codex's `--no-daemon` keeps tool commands in the new pane's environment; `--approve-for-me` uses automatic approval review with the workspace-write sandbox. Claude Code uses its configured model unless the user specifies one. Report the actual model used and any launch failure. Automatic review can still block actions; handle those decisions through the authorized approval route.
 
-Use `herdr agent prompt <name-or-pane-id> <text>` to submit an initial brief or a peer message. It can submit while the target is working; the submission alone does not prove the target has processed it. Let developers and verifiers exchange corrections without making each sender wait on the other's ongoing turn. Add `--wait --timeout <ms>` only when the caller needs the target to settle before continuing, or use a later bounded `herdr agent wait`. A wait observes lifecycle state, not completion of a particular prompt or turn; when the agent was already working, its current turn may satisfy it. After a settled state, use `herdr agent get` and `herdr agent read <target> --source recent-unwrapped --lines <n>` to collect the actual response and evidence. Read additional available history if necessary. If the response remains incomplete, ask the agent to write the result to a temporary Markdown file and return its path, then read that file; use this only as a fallback.
+## Shared Codex daemon context
 
-Treat `idle` and `done` as ready for more input, then inspect the response to determine whether the commitment was met. `blocked` means the agent needs interaction; inspect its UI and relay the question or approval through the authorized route. `unknown` does not establish completion. A timeout or `agent_prompt_stalled` does not prove that no prompt was submitted: inspect agent state and output before retrying. Use bounded `herdr agent wait` calls for later state changes, and route reproducible defects directly between the developer and verifier by addressing their live names or pane IDs. The director accepts only after reading their delivered interface and verifier evidence.
+Routine Herdr detection only needs `HERDR_ENV=1` and the CLI. If `pane_not_found` occurs, compare the current TUI's `HERDR_*` environment with the tool process's: a shared daemon can retain an old pane ID. Match the TUI PID to `herdr pane process-info`, then explicitly target that live pane. If the current TUI cannot be identified, report the missing context.
+
+## Delivery coordination
+
+Give each executor the shared workflow's self-contained brief and its peers' live Herdr addresses. The director collects results explicitly using the official skill's output-retrieval procedure; Herdr does not deliver a built-in parent mailbox. Accept only after reading the deliverable and its validation evidence.

@@ -12,6 +12,8 @@ With `collaboration.spawn_agent`, use these exact settings:
 
 Full-history forks inherit their parent's settings and cannot accept model or effort overrides. Give every fresh agent a self-contained brief with essential background, confirmed decisions, applicable instructions, ownership, and accessible resources. Respect the live concurrency limit.
 
+Built-in agents inherit the current task's permissions. `spawn_agent` has no separate auto-mode argument; automatic approval flags apply to CLI launches in the Herdr guide.
+
 ## Coordinate
 
 Use the returned canonical task names as peer addresses. Send a message with `collaboration.send_message` to a working agent; use `collaboration.followup_task` to give an idle agent another task. Send missing peer IDs after all relevant agents exist.
